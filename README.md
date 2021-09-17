@@ -1,25 +1,29 @@
 
-
 #### Run the Application
 Here is the steps to run it with `docker-compose`
 
 
 ### Clone 
 ```bash
-$ git clone https://github.com/Younesi/go-url-shortener/tree/master
+$ git clone https://github.com/younesi/go-url-shortener.git
 ```
-### move to project
+### Move to project
 ```bash
 $ cd go-url-shortener
 ```
-### build it up
+### Build it up
 ```bash
 docker-compose up --build -d
 ```
-### check if the containers are running
+#### Check if the containers are running
 ```bash
 $ docker ps
 ```
+
+## APIs
+
+### Postman
+ - Postman file(URL shortener.postman_collection.json) is added to the repository
 #### Create short URL API
 ```bash
 $ curl --request POST \
@@ -30,8 +34,7 @@ $ curl --request POST \
 ```
 #### Get short URL API
 ```bash
-$ curl --request GET \
-  http://localhost:3000/api/v1/Rx8hdYnM
+$ curl --location --request GET 'http://localhost:3000/api/v1/Rx8hdYnM'
 ```
 
 #### Stop
