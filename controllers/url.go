@@ -27,7 +27,7 @@ func NewUrlController(service entities.UrlUsecase) (handler UrlHandler) {
 func (u *UrlHandler) CreateShortUrl(c *gin.Context) {
 	var creationRequest UrlRequest
 	if err := c.ShouldBindJSON(&creationRequest); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"errorg": err.Error()})
 		return
 	}
 

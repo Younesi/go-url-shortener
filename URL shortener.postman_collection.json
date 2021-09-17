@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "19ab4c20-cfaf-4eca-81c0-02cbf2e67cbb",
+		"name": "URL shortener",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Short URL",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"long_url\" : \"https://github.com/\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/create-short-url",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"create-short-url"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Redirect API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/JWmeg4AR",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"JWmeg4AR"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
