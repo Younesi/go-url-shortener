@@ -1,24 +1,30 @@
-# Builder
-FROM golang:1.14.2-alpine3.11
+FROM golang:1.14.2-alpine3.11 AS builder
 
-RUN apk update && apk upgrade && \
-    apk --update add git make
+# Move to working directory /build
+WORKDIR /build
 
-WORKDIR /app
+# Copy and download dependency using go mod
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
 
+# Copy the code into the container
 COPY . .
 
-# Distribution
-FROM alpine:latest
+# Build the application
+RUN go build -o main .
 
-RUN apk update && apk upgrade && \
-    apk --update --no-cache add tzdata && \
-    mkdir /app 
+# Move to /dist directory as the place for resulting binary folder
+WORKDIR /dist
 
-WORKDIR /app 
+# Copy binary from build to main folder
+RUN cp /build/main .
 
-EXPOSE 8080
+# Build a small image
+FROM scratch
+COPY --from=builder /dist/main /
 
-COPY --from=builder /app/engine /app
+EXPOSE 3000
 
-CMD /app/engine
+# Command to run
+ENTRYPOINT ["/main"]

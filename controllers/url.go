@@ -33,7 +33,7 @@ func (u *UrlHandler) CreateShortUrl(c *gin.Context) {
 
 	shortUrl, _ := u.urlService.Store(c, creationRequest.LongUrl)
 
-	host := "http://localhost:8080/api/v1/"
+	host := "http://localhost:3000/api/v1/"
 	c.JSON(200, gin.H{
 		"message":   "short url created successfully",
 		"short_url": host + shortUrl,
