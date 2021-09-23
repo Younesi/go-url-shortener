@@ -1,10 +1,12 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 	"github.com/younesi/go-url-shortener/entities"
 )
 
@@ -33,7 +35,10 @@ func (u *UrlHandler) CreateShortUrl(c *gin.Context) {
 
 	shortUrl, _ := u.urlService.Store(c, creationRequest.LongUrl)
 
-	host := "http://localhost:3000/api/v1/"
+	apiPort := viper.GetString(`database.port`)
+	serverPort := viper.GetString(`server.port`)
+	host := fmt.Sprintf("http://localhost:%s/api/%s/", apiPort, serverPort)
+
 	c.JSON(200, gin.H{
 		"message":   "short url created successfully",
 		"short_url": host + shortUrl,

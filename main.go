@@ -74,5 +74,3 @@ func main() {
 	}
 
 }
-
-// Dockerize and deploy the service in the cloud.

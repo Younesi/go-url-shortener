@@ -10,7 +10,9 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-
+    networks:
+      shortner_net:
+        ipv4_address: 172.24.0.3
   mysql:
     image: mysql:5.7 
     container_name: url_shortener_mysql
@@ -26,3 +28,15 @@ services:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 5s
       retries: 10
+    networks:
+      shortner_net:
+        ipv4_address: 172.24.0.2
+
+networks:
+  shortner_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      -
+        subnet: 172.24.0.0/24
